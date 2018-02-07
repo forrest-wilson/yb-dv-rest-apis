@@ -1,0 +1,23 @@
+{
+  "name": "yb-dv-rest-apis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forrest-wilson/yb-dv-rest-apis.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/forrest-wilson/yb-dv-rest-apis/issues"
+  },
+  "homepage": "https://github.com/forrest-wilson/yb-dv-rest-apis#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1"
+  }
+}
