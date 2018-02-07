@@ -34,6 +34,7 @@ function drawMarkers(data) {
         markers.push(marker);
     }
     zoomBounds();
+    appendDivs(data.results);
 }
 
 function zoomBounds() {
@@ -49,6 +50,15 @@ function removeMarkers() {
         markers[i].setMap(null);
     }
     markers = [];
+}
+
+function appendDivs(data) {
+    $("#info").empty();
+    for (var i = 0; i < data.length; i++) {
+        console.log(data[i]);
+        var el = $("<p>" + data[i].formatted_address + "</p><button class=\"btn btn-primary search-res\">Show Me</button><br>");
+        $("#info").append(el);
+    }
 }
 
 // Event handler
