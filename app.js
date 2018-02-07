@@ -24,6 +24,7 @@ function ajax(method, url, success) {
 }
 
 function drawMarkers(data) {
+    removeMarkers();
     for (var i = 0; i < data.results.length; i++) {
         var coords = data.results[i].geometry.location;
         var latLng = new google.maps.LatLng(coords.lat,coords.lng);
