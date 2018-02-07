@@ -33,14 +33,14 @@ function drawMarkers(data) {
         });
         markers.push(marker);
     }
-    zoomBounds();
+    zoomBounds(markers);
     appendDivs(data.results);
 }
 
-function zoomBounds() {
+function zoomBounds(array) {
     var bounds = new google.maps.LatLngBounds();
-    for (var i = 0; i < markers.length; i++) {
-        bounds.extend(markers[i].getPosition());
+    for (var i = 0; i < array.length; i++) {
+        bounds.extend(array[i].getPosition());
     }
     map.fitBounds(bounds);
 }
@@ -55,17 +55,22 @@ function removeMarkers() {
 function appendDivs(data) {
     $("#info").empty();
     for (var i = 0; i < data.length; i++) {
-        console.log(data[i]);
         var el = $("<p>" + data[i].formatted_address + "</p><button class=\"btn btn-primary search-res\">Show Me</button><br>");
         $("#info").append(el);
     }
 }
 
-// Event handler
-$("#submit").on("click", function(e) {
-    e.preventDefault();
-    var searchTerm = $("#input").val();
+$(document).ready(function() {
+    // Event handler
+    $("#submit").on("click", function(e) {
+        e.preventDefault();
+        var searchTerm = $("#input").val();
+        removeMarkers();
+        ajax("POST", "http://maps.googleapis.com/maps/api/geocode/json?address=" + searchTerm, drawMarkers);
+    });
 
-    removeMarkers();
-    ajax("POST", "http://maps.googleapis.com/maps/api/geocode/json?address=" + searchTerm, drawMarkers);
+    $(document).on("click", ".search-res", function() {
+        var index = $(this).index(".search-res");
+        zoomBounds([markers[index]]);
+    });
 });
