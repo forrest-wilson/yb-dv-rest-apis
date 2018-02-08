@@ -4,7 +4,7 @@ var markers = [];
 function initMap() {
     map = new google.maps.Map(document.getElementById('output'), {
         zoom: 2,
-        maxZoom: 12,
+        maxZoom: 8,
         center: new google.maps.LatLng(2.8,-187.3),
         mapTypeId: 'terrain'
     });
@@ -24,6 +24,7 @@ function ajax(method, url, success) {
 }
 
 function drawMarkers(data) {
+    console.log(data);
     removeMarkers();
     for (var i = 0; i < data.results.length; i++) {
         var coords = data.results[i].geometry.location;
