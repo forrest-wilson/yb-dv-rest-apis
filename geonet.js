@@ -47,19 +47,19 @@ function drawChart() {
                 }
             }
 
-            var a;
-            var b;
+            var stillKey,
+                shakyKey;
 
             for (i in stillestDay) {
-                a = i;
+                stillKey = i;
             }
 
             for (i in shakiestDay) {
-                b = i;
+                shakyKey = i;
             }
 
-            $("#summary").append("<p>Stillest Day: " + a + ", " + stillestDay[a] + " earthquakes.</p>");
-            $("#summary").append("<p>Shakiest Day: " + b + ", " + shakiestDay[b] + " earthquakes.</p>");
+            $("#summary").append("<p>Stillest Day: " + stillKey + ", " + stillestDay[stillKey] + " earthquakes.</p>");
+            $("#summary").append("<p>Shakiest Day: " + shakyKey + ", " + shakiestDay[shakyKey] + " earthquakes.</p>");
         
             chart = new google.visualization.LineChart(document.getElementById('chartLocation'));
         
