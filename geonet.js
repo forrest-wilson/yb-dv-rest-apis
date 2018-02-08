@@ -13,18 +13,57 @@ function drawChart() {
         success: function(data) {
             var dataTable = new google.visualization.DataTable();
             dataTable.addColumn("string", "Date");
-            dataTable.addColumn("number", "Magnitude");
-            dataTable.addColumn("number", "Reading");
+            dataTable.addColumn("number", "Earthquake Frequency");
 
-            console.log(data.magnitudeCount);
+            var rate = data.rate.perDay;
 
-            dataTable.addRow(["2017", ]);
+            var stillestDay = null,
+                stillCount = null,
+                shakiestDay = null,
+                shakeCount = null;
+
+            for (i in rate) {
+                var parsedDate = i.substr(0, 10);
+                dataTable.addRow([parsedDate, rate[i]]);
+
+                if (shakeCount === null) {
+                    shakeCount = rate[i];
+                    shakiestDay = {[parsedDate]: rate[i]};
+                } else {
+                    if (rate[i] > shakeCount) {
+                        shakeCount = rate[i];
+                        shakiestDay = {[parsedDate]: rate[i]};
+                    }
+                }
+
+                if (stillCount === null) {
+                    stillCount = rate[i];
+                    stillestDay = {[parsedDate]: rate[i]};
+                } else {
+                    if (rate[i] < stillCount) {
+                        stillCount = rate[i];
+                        stillestDay = {[parsedDate]: rate[i]};
+                    }
+                }
+            }
+
+            var a;
+            var b;
+
+            for (i in stillestDay) {
+                a = i;
+            }
+
+            for (i in shakiestDay) {
+                b = i;
+            }
+
+            $("#summary").append("<p>Stillest Day: " + a + ", " + stillestDay[a] + " earthquakes.</p>");
+            $("#summary").append("<p>Shakiest Day: " + b + ", " + shakiestDay[b] + " earthquakes.</p>");
         
-            chart = new google.visualization.BarChart(document.getElementById('chartLocation'));
+            chart = new google.visualization.LineChart(document.getElementById('chartLocation'));
         
             chart.draw(dataTable, null);
-
-            setTimeout(getLatest, 5000);
         },
         error: function(error) {
             console.log(error + " Something went wrong");
