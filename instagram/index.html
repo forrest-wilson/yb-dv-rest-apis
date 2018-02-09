@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Instagram API</title>
+    <style>
+        #igFeed {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .igImage {
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .igImage img {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Instagram API</h1>
+    <div id="igFeed"></div>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="instagram.js"></script>
+</body>
+</html>
